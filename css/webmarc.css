@@ -3,25 +3,18 @@ html, body {
 	margin: 0;
     padding: 0;
 }
-.tst {
-    position: absolute;
-	top: 0;
-	left: 0;
-    float: left;
-    background: beige;
-	color: cadetblue;
-    line-height: 1;
-    vertical-align: middle;
-	font-size: 10vw;
-	opacity: 0.4;
+.container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
-.scr {
-	~border: 2px solid coral;
-}
-.grid {
+
+.workspace {
+	position: absolute;
 	background: lightblue;
 	display: inline;
 }
-.red {
-	background: red;
+.info {
+	background: lightgreen;
+	color: black;
 }
