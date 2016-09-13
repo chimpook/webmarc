@@ -1,6 +1,7 @@
 /**
  * Created by nimda on 10.09.2016.
  */
+"use strict";
 
 const SCREEN_H = 25;
 const SCREEN_W = 80;
@@ -10,31 +11,32 @@ $(document).ready(function(){
     // Размер экрана
     var window_w = $(window).width();
     var window_h = $(window).height();
-
     console.log("window: ", window_w, "x", window_h);
 
-    // Размер знакоместа
-    var letter_w = 2 * window_w / SCREEN_W - 4.5;
-    var letter_h = 2 * window_h / SCREEN_H - 4.5;
+    // Размер блока scr
+    $(".scr").css("width", window_w + "px");
+    $(".scr").css("height", window_h + "px");
+    var scr_w = $(".scr").width();
+    var scr_h = $(".scr").height();
+    console.log("scr: ", scr_w, "x", scr_h);
 
-    console.log("letter: ", letter_w, "x", letter_h);
+    // Размер grid
+    var grid_w = $(".grid").width();
+    var grid_h = $(".grid").height();
+    console.log("grid: ", grid_w, "x", grid_h);
 
-    var vp_w = 1.25;
-    var vp_h = window_h / 100;
+    // Коэффициенты трансформации
+    var transf_w = scr_w / grid_w;
+    var transf_h = scr_h / grid_h;
+    console.log("transf: ", transf_w, "x", transf_h);
 
-    console.log("vp: ", vp_w, "x", vp_h);
+    // Трансформация
+    $(".grid").css("display","block");
+    $(".grid").css("width",grid_w);
+    $(".grid").css("transform-origin", transf_w/2 + "px " + transf_h/2 + "px");
+    $(".grid").css("transform", "scale("+transf_w+", "+transf_h+")");
 
-    //$(".test").css("height", letter_h);
-    //$(".test").css("width", letter_w);
-    //$(".test").css("font-size", vp_w + "vw");
-    //$(".test").css("line-height", 1);
-
-    //$(".lorem").css("fontSize", letter_w + "px");
-    //$(".lorem").css("line-height", 1)
-
-
-
-    //$(".test").css("color", "red");
-
+    // Выводим информацию
+    $(".grid").html("<span class='red'>Проверка</span>");
 
 });

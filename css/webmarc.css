@@ -1,28 +1,27 @@
 html, body {
     font-family: monospace;
+	margin: 0;
     padding: 0;
 }
-.test {
+.tst {
     position: absolute;
 	top: 0;
 	left: 0;
-    ~display: none;
     float: left;
-    padding: 0;
-    background: cyan;
+    background: beige;
+	color: cadetblue;
     line-height: 1;
     vertical-align: middle;
-	font-size: 2.5vw;
+	font-size: 10vw;
+	opacity: 0.4;
 }
-.lorem  {
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 0;
-	float: left;
-	background: gold;
-	transform: scale(1, 0.839);
-	transform-origin: 0 0;
-	border: 1px solid blue;
-	font-size: 2.24vw;
+.scr {
+	~border: 2px solid coral;
+}
+.grid {
+	background: lightblue;
+	display: inline;
+}
+.red {
+	background: red;
 }
