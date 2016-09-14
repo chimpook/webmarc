@@ -18,3 +18,7 @@ html, body {
 	background: lightgreen;
 	color: black;
 }
+.red {
+	background: pink;
+	color: darkred;
+}

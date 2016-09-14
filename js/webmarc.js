@@ -9,8 +9,14 @@ $(document).ready(function(){
     var ws = webcurses.initscr();
 
     // Выводим информацию
-    ws.html("<span class='info'>Проверка вывода текста в подготовленную рабочую область</span>");
-
+    //ws.html("<span class='info'>Проверка вывода текста в подготовленную рабочую область</span>");
+    //ws.html(webcurses.mosaic());
+    //ws.html("⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊹");
+/*
+    ws.html("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>" +
+        "..................................................<br />" +
+        "[          [          [          [          [          ");
+*/
 
 });
 
@@ -49,7 +55,7 @@ var webcurses = {
         ws.css("transform", "scale("+transf_w+", "+transf_h+")");
 
         // Очистка рабочей области
-        ws.html("");
+        //ws.html("");
 
         return ws;
     },
@@ -66,11 +72,30 @@ var webcurses = {
                 ) {
                     grid.push("⊹");
                 } else {
-                    grid.push("&nbsp;");
+                    grid.push(".");
                 }
             }
             grid.push("<br/>");
         }
         return "<div class='workspace'>" + grid.join('') + "</div>";
+    },
+
+    mosaic : function() {
+        var scr = [];
+        for (var i=0; i<SCREEN_H; i++) {
+            scr[i] = [];
+            for (var j=0; j<SCREEN_W; j++) {
+                scr[i][j] = "$";
+            }
+        }
+        console.log(scr);
+        var output = "";
+        for (i=0; i< SCREEN_H; i++) {
+            for (j=0; j<SCREEN_W; j++) {
+                output += "<span>" + scr[i][j] + "</span>";
+            }
+            output += "<br />";
+        }
+        return output;
     }
 };
