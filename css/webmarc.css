@@ -11,9 +11,18 @@ html, body {
 
 .workspace {
 	position: absolute;
-	background: lightblue;
+	background: black;
+	color: gray;
 	display: inline;
+	border: 0;
+	margin: 0;
+	~letter-spacing: 0px;
+	~word-spacing: 0px;
+	~font-size: 0;
 }
+.workspace span { display: block; float: left; }
+.workspace table td { display: block; float: left;}
+
 .info {
 	background: lightgreen;
 	color: black;
@@ -22,3 +31,22 @@ html, body {
 	background: pink;
 	color: darkred;
 }
+
+.bg_,
+.bg_0 { background: white; }
+.bg_1 { background: lightblue; }
+.bg_2 { background: lightgreen; }
+.bg_3,
+.bg_4 { background: lightpink; }
+.bg_5,
+.bg_6 { background: gold; }
+
+.fg_,
+.fg_0 { color: white; }
+.fg_1 { color: lightblue; }
+.fg_2 { color: lightgreen; }
+.fg_3,
+.fg_4 { color: lightcoral; }
+.fg_5 { color: lightpink; }
+.fg_6 { color: gold; }
+
