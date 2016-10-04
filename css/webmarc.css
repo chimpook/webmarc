@@ -1,5 +1,6 @@
 html, body {
     font-family: monospace;
+	font-weight: bold;
 	margin: 0;
     padding: 0;
 }
@@ -33,20 +34,25 @@ html, body {
 }
 
 .bg_,
-.bg_0 { background: white; }
-.bg_1 { background: lightblue; }
-.bg_2 { background: lightgreen; }
-.bg_3,
-.bg_4 { background: lightpink; }
-.bg_5,
-.bg_6 { background: gold; }
+.bg_0 { background: black; }
+.bg_1 { background: darkblue; }
+.bg_2 { background: darkgreen; }
+.bg_3 { background: darkorange; }
+.bg_4 { background: darkred; }
+.bg_5 { background: darkmagenta; }
+.bg_6 { background: goldenrod; }
+.bg_7 { background: darkcyan; }
 
 .fg_,
-.fg_0 { color: white; }
-.fg_1 { color: lightblue; }
-.fg_2 { color: lightgreen; }
-.fg_3,
-.fg_4 { color: lightcoral; }
-.fg_5 { color: lightpink; }
-.fg_6 { color: gold; }
-
+.fg_0 { color: black; }
+.fg_1 { color: darkblue; }
+.fg_2 { color: darkgreen; }
+.fg_3 { color: darkorange; }
+.fg_4 { color: darkred; }
+.fg_5 { color: darkmagenta; }
+.fg_6 { color: goldenrod; }
+.fg_7 { color: cyan; }
+.fg_8 { color: deeppink; }
+.fg_9 { color: gray; }
+.fg_a { color: white; }
+.fg_b { color: cornflowerblue; }
