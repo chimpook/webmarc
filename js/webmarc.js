@@ -2,6 +2,7 @@
 
 const SCREEN_W = 80;
 const SCREEN_H = 25;
+const FONT_ADJUST = 0.58;
 
 $(document).ready(function(){
 
@@ -38,6 +39,24 @@ var webcurses = {
         var ws_h = ws.height();
         //console.log("workspace: ", ws_w, "x", ws_h);
 
+        /**
+         * Рассчитываем размер шрифта таким образом,
+         * чтобы наиболее точно вписать рабочую область в контейнер
+         * @type {number}
+         */
+        // Подгонка по высоте
+        var font_h = container_h / SCREEN_H ^ 0;
+        var font_w = font_h * FONT_ADJUST;
+        if (font_w * SCREEN_W > container_w) {
+            // Подгонка по ширине
+            console.log("font too big");
+            font_w = container_w / SCREEN_W ^ 0;
+            font_h = font_w / FONT_ADJUST ^ 0;
+        }
+
+        ws.css("font-size", font_h + "px");
+        console.log(font_h, ' x ', font_w);
+
         // Коэффициенты трансформации
         var transf_w = (container_w / ws_w);
         var transf_h = (container_h / ws_h);
@@ -47,8 +66,9 @@ var webcurses = {
         ws.css("display", "block");
         //ws.css("width", container_w);
         //ws.css("transform-origin", transf_w/2 + "px " + transf_h/2 + "px");
-        ws.css("transform-origin", "0px 0px");
-        ws.css("transform", "scale("+transf_w+", "+transf_h+")");
+        //ws.css("transform-origin", "0px 0px");
+        //ws.css("transform", "scale("+transf_w+", "+transf_h+")");
+        //ws.css("transform", "scale("+transf_w+", 1)");
 
         // Очистка рабочей области
         //ws.html("");
