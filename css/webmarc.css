@@ -36,13 +36,13 @@ html, body {
 
 .bg_,
 .bg_0 { background: black; }
-.bg_1 { background: darkblue; }
-.bg_2 { background: darkgreen; }
-.bg_3 { background: darkorange; }
-.bg_4 { background: darkred; }
-.bg_5 { background: darkmagenta; }
-.bg_6 { background: goldenrod; }
-.bg_7 { background: darkcyan; }
+.bg_1 { background: red; }
+.bg_2 { background: green; }
+.bg_3 { background: yellow; }
+.bg_4 { background: blue; }
+.bg_5 { background: magenta; }
+.bg_6 { background: cyan; }
+.bg_7 { background: white; }
 
 .fg_,
 .fg_0 { color: black; }
@@ -57,3 +57,8 @@ html, body {
 .fg_9 { color: gray; }
 .fg_a { color: white; }
 .fg_b { color: cornflowerblue; }
+.fg_z { color: white; animation: blinker 0.5s ease infinite; }
+
+@keyframes blinker {
+	50% { opacity: 0; }
+}
