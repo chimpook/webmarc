@@ -44,19 +44,53 @@ html, body {
 .bg_6 { background: cyan; }
 .bg_7 { background: white; }
 
+.bg_8 { background: darkgray; }
+.bg_9 { background: darkred; }
+.bg_a { background: darkgreen; }
+.bg_b { background: darkgoldenrod; }
+.bg_c { background: darkblue; }
+.bg_d { background: darkmagenta; }
+.bg_e { background: darkcyan; }
+.bg_f { background: darkgray; }
+
+.bg_g { background: lightgray; }
+.bg_h { background: lightcoral; }
+.bg_i { background: lightgreen; }
+.bg_j { background: lightgoldenrodyellow; }
+.bg_k { background: lightblue; }
+.bg_l { background: lightpink; }
+.bg_m { background: lightcyan; }
+.bg_n { background: lightgray; }
+
+
 .fg_,
 .fg_0 { color: black; }
-.fg_1 { color: darkblue; }
-.fg_2 { color: darkgreen; }
-.fg_3 { color: darkorange; }
-.fg_4 { color: darkred; }
-.fg_5 { color: darkmagenta; }
-.fg_6 { color: goldenrod; }
-.fg_7 { color: cyan; }
-.fg_8 { color: deeppink; }
-.fg_9 { color: gray; }
-.fg_a { color: white; }
-.fg_b { color: cornflowerblue; }
+.fg_1 { color: red; }
+.fg_2 { color: green; }
+.fg_3 { color: yellow; }
+.fg_4 { color: blue; }
+.fg_5 { color: magenta; }
+.fg_6 { color: cyan; }
+.fg_7 { color: white; }
+
+.fg_8 { color: dimgray; }
+.fg_9 { color: darkred; }
+.fg_a { color: darkgreen; }
+.fg_b { color: darkgoldenrod; }
+.fg_c { color: darkblue; }
+.fg_d { color: darkmagenta; }
+.fg_e { color: darkcyan; }
+.fg_f { color: darkgray; }
+
+.fg_g { color: slategrey; }
+.fg_h { color: lightcoral; }
+.fg_i { color: lightgreen; }
+.fg_j { color: lightgoldenrodyellow; }
+.fg_k { color: lightblue; }
+.fg_l { color: lightpink; }
+.fg_m { color: lightcyan; }
+.fg_n { color: lightgray; }
+
 .fg_z { color: white; animation: blinker 0.5s ease infinite; }
 
 @keyframes blinker {
