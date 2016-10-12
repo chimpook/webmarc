@@ -87,14 +87,14 @@ html, body {
 .fg_e { color: darkcyan; }
 .fg_f { color: darkgray; }
 
-.fg_g { color: slategrey; }
+.fg_g { color: lightgray; }
 .fg_h { color: lightcoral; }
 .fg_i { color: lightgreen; }
 .fg_j { color: lightgoldenrodyellow; }
 .fg_k { color: lightblue; }
 .fg_l { color: lightpink; }
 .fg_m { color: lightcyan; }
-.fg_n { color: lightgray; }
+.fg_n { color: slategray; }
 
 .fg_z { color: white; animation: blinker 0.5s ease infinite; }
 
