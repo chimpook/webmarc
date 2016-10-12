@@ -9,19 +9,23 @@ $(document).ready(function () {
     // Инициализируем рабочую область
     webcurses.grid = 0;
     var ws = webcurses.initscr();
+    webcurses.initkeys();
 
     // Выводим информацию
     //ws.html("<span class='info'>Проверка вывода текста в подготовленную рабочую область</span>");
     //webcurses.mosaic();
     ws.html(webcurses.mosaic());
     webcurses.drawGrid();
+
+
 });
 
 var webcurses = {
 
     grid: 1,
+    status: 'start',
 
-    drawGrid: function() {
+    drawGrid: function () {
         if (this.grid == 0) {
             $(".workspace span").css('border-right', 'none');
             $(".workspace span").css('border-bottom', 'none');
@@ -90,6 +94,27 @@ var webcurses = {
         //ws.html("");
 
         return ws;
+    },
+
+    initkeys: function () {
+        $(document).keypress(function (event) {
+            if (event.which == 13) {
+                console.log(webcurses.status);
+                if (webcurses.status === 'mosaic') {
+                    $(".workspace").html(webcurses.imitate());
+                } else {
+                    alert('working hard');
+                }
+
+                event.preventDefault();
+            }
+        });
+        /*
+         $(document).on('keydown', null, null, function(){
+         alert("Pressed");
+         return false;
+         });
+         */
     },
 
     buildWorkspace: function (width, height, method) {
@@ -249,10 +274,115 @@ var webcurses = {
             }
             buffer += "<br />";
         }
-
+        this.status = 'mosaic';
         return buffer;
 
-    }
+    },
+
+    imitate: function () {
+        var data = [];
+        data['content'] =
+            "     Настройка      Севис        Подготовка       Файлы       Выход             " +
+            "┌─────────────────────┬────────────────────────────────────────────────────────┐" +
+            "│Автор                │Широкорад А.Б.                                          │" +
+            "│Заглавие             │Дальневосточный филиал                                  │" +
+            "│Тип литературы       │Монография                                              │" +
+            "│Место издания        │М.                                                      │" +
+            "│Издательство         │АСТ; Транзиткнига                                       │" +
+            "│Дата издания         │2005                                                    │" +
+            "│Объем                │424 с.                                                  │" +
+            "│Илл./тип воспроизв.  │ил.                                                     │" +
+            "│Серия                │Военно-историческая б-ка                                │" +
+            "│Авторский знак       │Ш 645                                                   │" +
+            "│Полочный шифр        │63.3(2)6-Н                                              │" +
+            "│Индекс ББК           │63.3(2)622                                              │" +
+            "│Инвентарный номер    │Б 1286750                                               │" +
+            "│Количество экз.      │1                                                       │" +
+            "│                     │                                                        │" +
+            "│                     │                                                        │" +
+            "│                     │                                                        │" +
+            "│                     │                                                        │" +
+            "│                     │                                                        │" +
+            "│                     │                                                        │" +
+            "└─────────────────────┴────────────────────────────────────────────────────────┘" +
+            " Документ: 1                 Всего: 12662      База: C:\\MARC\\ISTK.LDB           " +
+            "⇅-Лис.F1-Спр.F3-Соз.F4-Корр.F5-Коп.F6-Вых.фор. F7/Ctrl_F7-Поиск F8-Удл.F10-Меню ";
+
+        data['bg'] =
+            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "77777777777777777777777777777777777777777777777777777777777777777777777777777777" +
+            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+
+        data['fg'] =
+            "                                                                                " +
+            "                                                                                " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                       cccccccccccccccccccccccccccccccccccccccccccccccccccccccc " +
+            "                                                                                " +
+            "99999999999999999999999999999999999999999999999999999999999999999999999999999999" +
+            "70000007700000770000077000000770000077000000000777777777700000007700000777000000";
+
+        //console.log(data['fg']);
 
 
+        var buffer = "";
+        var letter = "";
+        for (var i = 0; i < SCREEN_H; i++) {
+            for (var j = 0; j < SCREEN_W; j++) {
+                if (data['content'][i * SCREEN_W + j] === ' ') {
+                    letter = '&nbsp;';
+                } else {
+                    letter = data['content'][i * SCREEN_W + j];
+                }
+                buffer += "<span class='bg_" + data['bg'][i * SCREEN_W + j] + " fg_" + data['fg'][i * SCREEN_W + j] + "'>" +
+                    letter
+                    + "</span>";
+            }
+            buffer += "<br />";
+        }
+
+        this.status = 'imitate';
+        return buffer;
+
+    },
 };
