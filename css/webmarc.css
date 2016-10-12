@@ -25,8 +25,6 @@ html, body {
 .workspace span {
 	display: block;
 	float: left;
-	border-right: 1px solid white;
-	border-bottom: 1px solid white;
 }
 .workspace table td { display: block; float: left;}
 
