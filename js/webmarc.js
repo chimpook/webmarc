@@ -7,20 +7,20 @@ const FONT_ADJUST = 0.58;
 $(document).ready(function () {
 
     // Инициализируем рабочую область
-    webcurses.grid = 0;
-    var ws = webcurses.initscr();
-    webcurses.initkeys();
+    webmarc.grid = 0;
+    var ws = webmarc.initscr();
+    webmarc.initkeys();
 
     // Выводим информацию
     //ws.html("<span class='info'>Проверка вывода текста в подготовленную рабочую область</span>");
-    //webcurses.mosaic();
-    ws.html(webcurses.mosaic());
-    webcurses.drawGrid();
+    //webmarc.mosaic();
+    ws.html(webmarc.mosaic());
+    webmarc.drawGrid();
 
 
 });
 
-var webcurses = {
+var webmarc = {
 
     grid: 1,
     status: 'start',
@@ -99,9 +99,9 @@ var webcurses = {
     initkeys: function () {
         $(document).keypress(function (event) {
             if (event.which == 13) {
-                console.log(webcurses.status);
-                if (webcurses.status === 'mosaic') {
-                    $(".workspace").html(webcurses.imitate());
+                console.log(webmarc.status);
+                if (webmarc.status === 'mosaic') {
+                    $(".workspace").html(webmarc.imitate());
                 } else {
                     alert('working hard');
                 }

@@ -5,18 +5,17 @@
 
 html, body {
     font-family: 'RobotoMono', monospace;
-	/*font-weight: bold;*/
 	margin: 0;
     padding: 0;
 }
-.container {
+#container {
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	line-height: 1;
 }
 
-.workspace {
+#workspace {
 	position: absolute;
 	background: black;
 	color: gray;
@@ -27,11 +26,12 @@ html, body {
 	~word-spacing: 0px;
 	~font-size: 0;
 }
-.workspace span {
+#workspace span {
 	display: block;
 	float: left;
+	width: 12px;
 }
-.workspace table td { display: block; float: left;}
+#workspace table td { display: block; float: left;}
 
 .info {
 	background: lightgreen;
