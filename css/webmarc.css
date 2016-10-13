@@ -1,6 +1,11 @@
+@font-face {
+	font-family: 'RobotoMono';
+	src: url(RobotoMono-Regular.ttf);
+}
+
 html, body {
-    font-family: monospace;
-	font-weight: bold;
+    font-family: 'RobotoMono', monospace;
+	/*font-weight: bold;*/
 	margin: 0;
     padding: 0;
 }
