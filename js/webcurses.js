@@ -3,12 +3,32 @@
 $(document).ready(function () {
 
     webcurses.initscr($("#container"));
+
+    /**
+     * Test of printw
+     */
     //webcurses.printw("Выяснить причину, по которой для некоторых заявок не создается заявление на покупку лицензии. ");
     //webcurses.printw("\nРеализовать логирование 1 license для процедуры выдачи лицензий.");
-    //console.log(webscreen.start.fg[0]);
+
+    /**
+     * Test of load
+     */
     webcurses.load(webscreen.start);
     webcurses.refresh();
-    //webcurses.initkeys();
+
+    $(document).keypress(function (event) {
+        if (event.which == 13) {
+            if (webcurses.status === 'start') {
+                webcurses.load(webscreen.imitate);
+                webcurses.status = 'imitate';
+            } else {
+                webcurses.load(webscreen.start);
+                webcurses.status = 'start';
+            }
+            webcurses.refresh();
+            event.preventDefault();
+        }
+    });
 
 });
 
@@ -19,6 +39,9 @@ var webcurses = {
     SCREEN_H: 25,
     FONT_AJUST: 0.58,
     GRID: 0,
+
+    // Состояние системы (потом перенести в webmarc)
+    status: 'start',
 
     // id рабочего пространства
     wss: 'workspace',
