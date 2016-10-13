@@ -3,10 +3,11 @@
 $(document).ready(function () {
 
     webcurses.initscr($("#container"));
-    webcurses.printw("Выяснить причину, по которой для некоторых заявок не создается заявление на покупку лицензии. ");
-    webcurses.printw("\nРеализовать логирование 1 license для процедуры выдачи лицензий.");
+    //webcurses.printw("Выяснить причину, по которой для некоторых заявок не создается заявление на покупку лицензии. ");
+    //webcurses.printw("\nРеализовать логирование 1 license для процедуры выдачи лицензий.");
+    //console.log(webscreen.start.fg[0]);
+    webcurses.load(webscreen.start);
     webcurses.refresh();
-    //console.log(webcurses.buf);
     //webcurses.initkeys();
 
 });
@@ -144,12 +145,34 @@ var webcurses = {
 
     refresh: function () {
         //console.log(this.ws[0].id);
-        var row, col, ch;
+        var row, col, chplace;
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
+                chplace = $("#" + this.wss + " span.row_" + row + ".col_" + col);
+                chplace.removeClass(function (index, css){
+                    return (css.match (/(^|\s)[bf]g_\S+/g) || []).join(' ');
+                });
+                chplace.addClass('bg_'+this.ram[row][col].bg);
+                chplace.addClass('fg_'+this.ram[row][col].fg);
+                chplace.html(this.ram[row][col].ch);
+            }
+        }
+    },
 
-                $("#" + this.wss + " span.row_" + row + ".col_" + col).html(this.ram[row][col].ch);
-                //console.log("#"+this.wss+" .row_"+row+" .col_"+col);
+    load: function (scr) {
+        var row, col, i, ch;
+        for (i = 0, row = 0; row < this.SCREEN_H; row++) {
+            for (col = 0; col < this.SCREEN_W; col++) {
+                if (scr.ch[i] === ' ') {
+                    ch = '&nbsp;'
+                } else {
+                    ch = scr.ch[i];
+                }
+                this.ram[row][col].ch = ch;
+                this.ram[row][col].bg = scr.bg[i];
+                this.ram[row][col].fg = scr.fg[i];
+                console.log(scr.fg[i]);
+                i++;
             }
         }
     }
