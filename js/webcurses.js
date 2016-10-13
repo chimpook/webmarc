@@ -3,8 +3,8 @@
 $(document).ready(function () {
 
     webcurses.initscr($("#container"));
-    webcurses.printw("Hello World of biggest world of the world of warcraft of billing system and state building!!!");
-    webcurses.printw("---Rock'N'Roll forever!!!");
+    webcurses.printw("Выяснить причину, по которой для некоторых заявок не создается заявление на покупку лицензии. ");
+    webcurses.printw("\nРеализовать логирование 1 license для процедуры выдачи лицензий.");
     webcurses.refresh();
     //console.log(webcurses.buf);
     //webcurses.initkeys();
@@ -115,8 +115,20 @@ var webcurses = {
     },
 
     printw: function (str) {
-        var y, x;
+        var y, x, ch;
         for (var i = 0, len = str.length; i < len; i++) {
+
+            if (str[i] === ' ') {
+                ch = '&nbsp;'
+            } else {
+                ch = str[i];
+            }
+
+            if (ch == '\n') {
+                this.cursor.y++;
+                this.cursor.x = 0;
+                continue;
+            }
 
             if (this.cursor.x >= this.SCREEN_W) {
                 this.cursor.y++;
@@ -126,8 +138,7 @@ var webcurses = {
                 this.cursor.y = 0;
                 this.cursor.x = 0;
             }
-
-            this.ram[this.cursor.y][this.cursor.x++].ch = str[i];
+            this.ram[this.cursor.y][this.cursor.x++].ch = ch;
         }
     },
 
@@ -136,8 +147,8 @@ var webcurses = {
         var row, col, ch;
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
-                ch = this.ram[row][col].ch == ' ' ? '&nbsp;' : this.ram[row][col].ch;
-                $("#" + this.wss + " span.row_" + row + ".col_" + col).html(ch);
+
+                $("#" + this.wss + " span.row_" + row + ".col_" + col).html(this.ram[row][col].ch);
                 //console.log("#"+this.wss+" .row_"+row+" .col_"+col);
             }
         }
