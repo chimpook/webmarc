@@ -223,6 +223,11 @@ var webcurses = {
 
         this.ram[this.cursor.y][this.cursor.x].ch = chr;
         console.log(this.cursor.y, this.cursor.x, this.ram[this.cursor.y][this.cursor.x].ch);
+    },
+
+    mvaddch: function (row, col, chr) {
+        this.move(row, col);
+        this.addch(chr);
     }
 
 };

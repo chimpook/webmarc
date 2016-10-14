@@ -16,8 +16,7 @@ $(document).ready(function () {
     webcurses.addch('l');
     webcurses.attroff('A_BOLD');
 
-    webcurses.move(0, 4);
-    webcurses.addch('l');
+    webcurses.mvaddch(0, 4, 'l');
 
     webcurses.refresh();
 
