@@ -1,38 +1,5 @@
 "use strict";
 
-$(document).ready(function () {
-
-    webcurses.initscr($("#container"));
-
-    /**
-     * Test of printw
-     */
-    //webcurses.printw("Выяснить причину, по которой для некоторых заявок не создается заявление на покупку лицензии. ");
-    //webcurses.printw("\nРеализовать логирование 1 license для процедуры выдачи лицензий.");
-
-    /**
-     * Test of load
-     */
-    webcurses.load(webscreen.start);
-    webcurses.refresh();
-
-    $(document).keypress(function (event) {
-        if (event.which == 13) {
-            if (webcurses.status === 'start') {
-                webcurses.load(webscreen.imitate);
-                webcurses.status = 'imitate';
-            } else {
-                webcurses.load(webscreen.start);
-                webcurses.status = 'start';
-            }
-            webcurses.refresh();
-            event.preventDefault();
-        }
-    });
-
-});
-
-
 var webcurses = {
 
     SCREEN_W: 80,
@@ -60,15 +27,9 @@ var webcurses = {
      */
     initscr: function (container) {
 
-        // Формируем массив видеопамяти
-        var row, col;
-        for (row = 0; row < this.SCREEN_H; row++) {
-            this.ram[row] = [];
-            for (col = 0; col < this.SCREEN_W; col++) {
-                this.ram[row][col] = {ch: '', bg: 0, fg: 7};
-            }
-        }
-
+        // "Очищаем" видео-память
+        this.clear();
+        
         // Формируем буффер для вывода
         this.ram2buf();
 
@@ -121,14 +82,29 @@ var webcurses = {
         //ws.html("");
     },
 
+    clear: function () {
+        // Формируем массив видеопамяти
+        var row, col;
+        this.ram = [];
+        this.cursor.x = 0;
+        this.cursor.y = 0;
+        this.buf = '';
+        for (row = 0; row < this.SCREEN_H; row++) {
+            this.ram[row] = [];
+            for (col = 0; col < this.SCREEN_W; col++) {
+                this.ram[row][col] = {ch: '', bg: 0, fg: 7};
+            }
+        }
+    },
+
     /**
      * Формирование буффера для вывода на экран
      */
     ram2buf: function () {
         var row, col;
+        this.buf = '';
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
-                this.ram[row][col] = {ch: '&nbsp;', bg: 0, fg: 7};
                 this.buf +=
                     '<span class="row_' + row + ' col_' + col + ' bg_' + this.ram[row][col].bg + ' fg_' + this.ram[row][col].fg + '">'
                     + this.ram[row][col].ch
@@ -167,19 +143,27 @@ var webcurses = {
     },
 
     refresh: function () {
-        //console.log(this.ws[0].id);
+        this.ram2buf();
+        $("#" + this.wss).html(this.buf);
+
+/*
+        // Этот метод обновления экрана отличается просто адовой ресурсоемкостью - до 1000 мс
         var row, col, chplace;
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
                 chplace = $("#" + this.wss + " span.row_" + row + ".col_" + col);
+
                 chplace.removeClass(function (index, css){
                     return (css.match (/(^|\s)[bf]g_\S+/g) || []).join(' ');
                 });
                 chplace.addClass('bg_'+this.ram[row][col].bg);
                 chplace.addClass('fg_'+this.ram[row][col].fg);
+
                 chplace.html(this.ram[row][col].ch);
             }
         }
+*/
+
     },
 
     load: function (scr) {
@@ -194,7 +178,7 @@ var webcurses = {
                 this.ram[row][col].ch = ch;
                 this.ram[row][col].bg = scr.bg[i];
                 this.ram[row][col].fg = scr.fg[i];
-                console.log(scr.fg[i]);
+                //console.log(scr.fg[i]);
                 i++;
             }
         }
