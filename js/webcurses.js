@@ -6,6 +6,7 @@ var webcurses = {
     SCREEN_H: 25,
     FONT_AJUST: 0.58,
     GRID: 0,
+    A_BOLD: 0,
 
     // Состояние системы (потом перенести в webmarc)
     status: 'start',
@@ -106,7 +107,9 @@ var webcurses = {
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
                 this.buf +=
-                    '<span class="row_' + row + ' col_' + col + ' bg_' + this.ram[row][col].bg + ' fg_' + this.ram[row][col].fg + '">'
+                    '<span class="row_' + row + ' col_' + col 
+                    + ' bg_' + this.ram[row][col].bg + ' fg_' + this.ram[row][col].fg 
+                    + (this.ram[row][col].a_bold ? ' a_bold':'') +'">'
                     + this.ram[row][col].ch
                     + '</span>';
             }
@@ -137,6 +140,10 @@ var webcurses = {
             if (this.cursor.y >= this.SCREEN_H) {
                 this.cursor.y = 0;
                 this.cursor.x = 0;
+            }
+            
+            if (this.A_BOLD) {
+                this.ram[this.cursor.y][this.cursor.x].a_bold = 1;
             }
             this.ram[this.cursor.y][this.cursor.x++].ch = ch;
         }
@@ -182,6 +189,14 @@ var webcurses = {
                 i++;
             }
         }
+    },
+
+    attron: function(attr) {
+        this.A_BOLD = 1;
+    },
+
+    attroff: function(attr) {
+        this.A_BOLD = 0;
     }
 
 };

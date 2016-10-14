@@ -42,6 +42,8 @@ html, body {
 	color: darkred;
 }
 
+.a_bold { font-weight: bold; }
+
 .bg_,
 .bg_0 { background: black; }
 .bg_1 { background: red; }
