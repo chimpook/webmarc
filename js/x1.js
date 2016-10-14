@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Example of initscr and printw and refresh
+ */
+
 $(document).ready(function () {
 
     webcurses.initscr($("#container"));

@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * Example of attron and attroff and keyboard processing
+ */
 
 $(document).ready(function () {
 

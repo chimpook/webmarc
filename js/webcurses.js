@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * WEBCURSES Library
+ */
+
 var webcurses = {
 
     SCREEN_W: 80,
@@ -30,7 +34,7 @@ var webcurses = {
 
         // "Очищаем" видео-память
         this.clear();
-        
+
         // Формируем буффер для вывода
         this.ram2buf();
 
@@ -93,7 +97,7 @@ var webcurses = {
         for (row = 0; row < this.SCREEN_H; row++) {
             this.ram[row] = [];
             for (col = 0; col < this.SCREEN_W; col++) {
-                this.ram[row][col] = {ch: '', bg: 0, fg: 7};
+                this.ram[row][col] = {ch: ' ', bg: 0, fg: 7};
             }
         }
     },
@@ -107,10 +111,10 @@ var webcurses = {
         for (row = 0; row < this.SCREEN_H; row++) {
             for (col = 0; col < this.SCREEN_W; col++) {
                 this.buf +=
-                    '<span class="row_' + row + ' col_' + col 
-                    + ' bg_' + this.ram[row][col].bg + ' fg_' + this.ram[row][col].fg 
-                    + (this.ram[row][col].a_bold ? ' a_bold':'') +'">'
-                    + this.ram[row][col].ch
+                    '<span class="row_' + row + ' col_' + col
+                    + ' bg_' + this.ram[row][col].bg + ' fg_' + this.ram[row][col].fg
+                    + (this.ram[row][col].a_bold ? ' a_bold' : '') + '">'
+                    + (this.ram[row][col].ch == ' ' ? '&nbsp;' : this.ram[row][col].ch)
                     + '</span>';
             }
             this.buf += '<br/>';
@@ -141,7 +145,7 @@ var webcurses = {
                 this.cursor.y = 0;
                 this.cursor.x = 0;
             }
-            
+
             if (this.A_BOLD) {
                 this.ram[this.cursor.y][this.cursor.x].a_bold = 1;
             }
@@ -153,23 +157,23 @@ var webcurses = {
         this.ram2buf();
         $("#" + this.wss).html(this.buf);
 
-/*
-        // Этот метод обновления экрана отличается просто адовой ресурсоемкостью - до 1000 мс
-        var row, col, chplace;
-        for (row = 0; row < this.SCREEN_H; row++) {
-            for (col = 0; col < this.SCREEN_W; col++) {
-                chplace = $("#" + this.wss + " span.row_" + row + ".col_" + col);
+        /*
+         // Этот метод обновления экрана отличается просто адовой ресурсоемкостью - до 1000 мс
+         var row, col, chplace;
+         for (row = 0; row < this.SCREEN_H; row++) {
+         for (col = 0; col < this.SCREEN_W; col++) {
+         chplace = $("#" + this.wss + " span.row_" + row + ".col_" + col);
 
-                chplace.removeClass(function (index, css){
-                    return (css.match (/(^|\s)[bf]g_\S+/g) || []).join(' ');
-                });
-                chplace.addClass('bg_'+this.ram[row][col].bg);
-                chplace.addClass('fg_'+this.ram[row][col].fg);
+         chplace.removeClass(function (index, css){
+         return (css.match (/(^|\s)[bf]g_\S+/g) || []).join(' ');
+         });
+         chplace.addClass('bg_'+this.ram[row][col].bg);
+         chplace.addClass('fg_'+this.ram[row][col].fg);
 
-                chplace.html(this.ram[row][col].ch);
-            }
-        }
-*/
+         chplace.html(this.ram[row][col].ch);
+         }
+         }
+         */
 
     },
 
@@ -191,12 +195,34 @@ var webcurses = {
         }
     },
 
-    attron: function(attr) {
+    attron: function (attr) {
         this.A_BOLD = 1;
     },
 
-    attroff: function(attr) {
+    attroff: function (attr) {
         this.A_BOLD = 0;
+    },
+
+    move: function (row, col) {
+        if (row < this.SCREEN_H) {
+            this.cursor.y = row;
+        }
+        if (col < this.SCREEN_W) {
+            this.cursor.x = col;
+        }
+    },
+
+    addch: function (chr) {
+        if (chr === ' ') {
+            chr = '&nbsp;'
+        }
+
+        if (this.A_BOLD) {
+            this.ram[this.cursor.y][this.cursor.x].a_bold = 1;
+        }
+
+        this.ram[this.cursor.y][this.cursor.x].ch = chr;
+        console.log(this.cursor.y, this.cursor.x, this.ram[this.cursor.y][this.cursor.x].ch);
     }
 
 };

@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Webmarc webcurses App
+ */
+
 $(document).ready(function () {
 
     //console.time('init');
