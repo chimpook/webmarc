@@ -14,7 +14,7 @@ var webcurses = {
 
     // Состояние системы (потом перенести в webmarc)
     status: 'start',
-
+    
     // id рабочего пространства
     wss: 'workspace',
 
@@ -26,6 +26,8 @@ var webcurses = {
         y: 0,
         x: 0
     },
+    
+    str: '',
 
     /**
      * Инициализация экрана
@@ -246,6 +248,10 @@ var webcurses = {
     mvprintw: function (row, col, str) {
         this.move(row, col);
         this.printw(str);
+    },
+    
+    getstr: function () {
+        this.status = 'getstr';
     }
 
 

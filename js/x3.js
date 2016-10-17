@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
 
-    var mesg = "Enter a string";
+    var mesg = "Just a string";
     var str;
     var maxyx = {row: 0, col: 0};
 

@@ -1,24 +1,42 @@
 "use strict";
 
 /**
- * Example of move and addch
+ * Example of getstr
  */
 
 $(document).ready(function () {
 
-    var mesg = "Just a string";
-    var row, col;
+    var mesg = "Enter a string: ";
+    var str;
+    var maxyx = {row: 0, col: 0};
 
     webcurses.initscr($("#container"));
 
-    row = webcurses.getmaxy();
-    col = webcurses.getmaxx();
+    maxyx = webcurses.getmaxyx();
 
-    webcurses.mvprintw(row/2, (col - mesg.length)/2, mesg);
-
-    webcurses.mvprintw(row - 2, 0, "This screen has "+row+" rows and "+col+" columns\n");
-
-    webcurses.printw("Try resizing your window (if possible, but not) and then run this program again");
+    webcurses.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
+    
     webcurses.refresh();
+
+    webcurses.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
+
+    $(document).keypress(function (event) {
+        //console.log(event.which);
+        switch (webcurses.status) {
+            case 'getstr':
+                if (event.which == 13) {
+                    webcurses.status = '';
+                    webcurses.mvprintw(maxyx.row - 2, 0, "You Entered: " + webcurses.str);
+                }
+                webcurses.str += String.fromCharCode(event.which);
+                webcurses.printw(String.fromCharCode(event.which));
+                webcurses.refresh();
+                break;
+            default:
+                break;
+        }
+        event.preventDefault();
+    });
+
 
 });
