@@ -252,6 +252,10 @@ var webcurses = {
     
     getstr: function () {
         this.status = 'getstr';
+    },
+
+    getyx: function () {
+        return {y: this.cursor.y, x: this.cursor.x};
     }
 
 
