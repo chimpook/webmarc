@@ -123,6 +123,7 @@ var webcurses = {
 
     printw: function (str) {
         var y, x, ch;
+
         for (var i = 0, len = str.length; i < len; i++) {
 
             if (str[i] === ' ') {
@@ -204,11 +205,11 @@ var webcurses = {
     },
 
     move: function (row, col) {
-        if (row < this.SCREEN_H) {
-            this.cursor.y = row;
+        if (row ^ 0 < this.SCREEN_H) {
+            this.cursor.y = row ^ 0;
         }
-        if (col < this.SCREEN_W) {
-            this.cursor.x = col;
+        if (col ^ 0 < this.SCREEN_W) {
+            this.cursor.x = col ^ 0;
         }
     },
 
@@ -228,6 +229,20 @@ var webcurses = {
     mvaddch: function (row, col, chr) {
         this.move(row, col);
         this.addch(chr);
+    },
+
+    getmaxx: function () {
+        return this.SCREEN_W;
+    },
+
+    getmaxy: function () {
+        return this.SCREEN_H;
+    },
+
+    mvprintw: function (row, col, str) {
+        this.move(row, col);
+        this.printw(str);
     }
+
 
 };

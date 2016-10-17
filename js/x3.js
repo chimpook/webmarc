@@ -6,18 +6,19 @@
 
 $(document).ready(function () {
 
+    var mesg = "Just a string";
+    var row, col;
+
     webcurses.initscr($("#container"));
 
-    webcurses.move(12, 12);
-    webcurses.addch('W');
+    row = webcurses.getmaxy();
+    col = webcurses.getmaxx();
 
-    webcurses.move(0, 3);
-    webcurses.attron('A_BOLD');
-    webcurses.addch('l');
-    webcurses.attroff('A_BOLD');
+    webcurses.mvprintw(row/2, (col - mesg.length)/2, mesg);
 
-    webcurses.mvaddch(0, 4, 'l');
+    webcurses.mvprintw(row - 2, 0, "This screen has "+row+" rows and "+col+" columns\n");
 
+    webcurses.printw("Try resizing your window (if possible, but not) and then run this program again");
     webcurses.refresh();
 
 });
