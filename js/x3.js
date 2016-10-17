@@ -6,17 +6,17 @@
 
 $(document).ready(function () {
 
-    var mesg = "Just a string";
-    var row, col;
+    var mesg = "Enter a string";
+    var str;
+    var maxyx = {row: 0, col: 0};
 
     webcurses.initscr($("#container"));
 
-    row = webcurses.getmaxy();
-    col = webcurses.getmaxx();
+    maxyx = webcurses.getmaxyx();
 
-    webcurses.mvprintw(row/2, (col - mesg.length)/2, mesg);
+    webcurses.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
 
-    webcurses.mvprintw(row - 2, 0, "This screen has "+row+" rows and "+col+" columns\n");
+    webcurses.mvprintw(maxyx.row - 2, 0, "This screen has "+maxyx.row+" rows and "+maxyx.col+" columns\n");
 
     webcurses.printw("Try resizing your window (if possible, but not) and then run this program again");
     webcurses.refresh();

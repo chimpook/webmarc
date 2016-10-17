@@ -238,6 +238,10 @@ var webcurses = {
     getmaxy: function () {
         return this.SCREEN_H;
     },
+    
+    getmaxyx: function () {
+        return {row: this.SCREEN_H, col: this.SCREEN_W};
+    },
 
     mvprintw: function (row, col, str) {
         this.move(row, col);
