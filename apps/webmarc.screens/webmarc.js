@@ -26,22 +26,27 @@ $(document).ready(function () {
     /**
      * По нажатию на Enter переключаем демонстрационные экраны
      */
+
+});
+
+var app = new Webcurses('Webmarc screens switch demo');
+app.process = function() {
+    var self = this;
     $(document).keypress(function (event) {
         if (event.which == 13) {
 
-            if (webcurses.status === 'start') {
+            if (self.status === 'start') {
                 // Экран имитации рабочего интерфейса
-                webcurses.load(webscreen.imitate);
-                webcurses.status = 'imitate';
+                self.load(webscreen.imitate);
+                self.status = 'imitate';
             } else {
                 // Стартовый экран с заставкой
-                webcurses.load(webscreen.start);
-                webcurses.status = 'start';
+                self.load(webscreen.start);
+                self.status = 'start';
             }
 
-            webcurses.refresh();
+            self.refresh();
             event.preventDefault();
         }
     });
-
-});
+};

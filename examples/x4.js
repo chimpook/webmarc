@@ -23,26 +23,26 @@ $(document).ready(function () {
 
 });
 
-var x4 = {
-  __proto__: webcurses,
+var x4 = new Webcurses('Example 4');
 
-    process: function () {
-        $(document).keypress(function(event) {
-            switch (x4.status) {
-                case 'getstr':
-                    if (event.which == 13) {
-                        x4.status = '';
-                        x4.mvprintw(x4.SCREEN_H - 2, 0, "You Entered: " + x4.str);
-                    }
-                    x4.str += String.fromCharCode(event.which);
-                    x4.printw(String.fromCharCode(event.which));
-                    x4.refresh();
-                    break;
-                default:
-                    break;
-            }
-            event.preventDefault();
-        });
-    }
+x4.process = function () {
 
+    var self = this;
+
+    $(document).keypress(function(event) {
+        switch (self.status) {
+            case 'getstr':
+                if (event.which == 13) {
+                    self.status = '';
+                    self.mvprintw(self.SCREEN_H - 2, 0, "You Entered: " + self.str);
+                }
+                self.str += String.fromCharCode(event.which);
+                self.printw(String.fromCharCode(event.which));
+                self.refresh();
+                break;
+            default:
+                break;
+        }
+        event.preventDefault();
+    });
 };

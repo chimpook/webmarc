@@ -22,22 +22,22 @@ $(document).ready(function () {
 
 });
 
-var x2 = {
+//var x2 = Object.create(webcurses);
 
-    __proto__: webcurses,
+var x2 = new Webcurses('Example 2');
 
-    process: function () {
-        $(document).keypress(function(event) {
-            console.log(event.which);
-            if (x2.A_BOLD) {
-                x2.attroff('A_BOLD');
-            } else {
-                x2.attron('A_BOLD');
-            }
-            x2.printw(String.fromCharCode(event.which));
-            x2.refresh();
-            event.preventDefault();
-        });
-    }
+x2.process = function () {
+    var self = this;
+    $(document).keypress(function(event) {
+        //console.log(event.which);
+        if (self.A_BOLD) {
+            self.attroff('A_BOLD');
+        } else {
+            self.attron('A_BOLD');
+        }
+        self.printw(String.fromCharCode(event.which));
+        self.refresh();
+        event.preventDefault();
+    });
 
 };

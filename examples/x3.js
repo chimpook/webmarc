@@ -23,6 +23,4 @@ $(document).ready(function () {
 
 });
 
-var x3 = {
-    __proto__: webcurses
-};
+var x3 = new Webcurses('Example 3');
