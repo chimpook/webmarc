@@ -8,6 +8,15 @@ html, body {
 	margin: 0;
     padding: 0;
 }
+
+.index {
+	margin: 24px;
+}
+
+.index a {
+	color: royalblue;
+}
+
 #container {
 	position: absolute;
 	width: 100%;
