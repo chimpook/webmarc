@@ -10,33 +10,39 @@ $(document).ready(function () {
     var str;
     var maxyx = {row: 0, col: 0};
 
-    webcurses.initscr($("#container"));
+    x4.initscr($("#container"));
+    x4.process();
 
-    maxyx = webcurses.getmaxyx();
+    maxyx = x4.getmaxyx();
 
-    webcurses.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
+    x4.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
     
-    webcurses.refresh();
+    x4.refresh();
 
-    webcurses.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
-
-    $(document).keypress(function (event) {
-        //console.log(event.which);
-        switch (webcurses.status) {
-            case 'getstr':
-                if (event.which == 13) {
-                    webcurses.status = '';
-                    webcurses.mvprintw(maxyx.row - 2, 0, "You Entered: " + webcurses.str);
-                }
-                webcurses.str += String.fromCharCode(event.which);
-                webcurses.printw(String.fromCharCode(event.which));
-                webcurses.refresh();
-                break;
-            default:
-                break;
-        }
-        event.preventDefault();
-    });
-
+    x4.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
 
 });
+
+var x4 = {
+  __proto__: webcurses,
+
+    process: function () {
+        $(document).keypress(function(event) {
+            switch (x4.status) {
+                case 'getstr':
+                    if (event.which == 13) {
+                        x4.status = '';
+                        x4.mvprintw(x4.SCREEN_H - 2, 0, "You Entered: " + x4.str);
+                    }
+                    x4.str += String.fromCharCode(event.which);
+                    x4.printw(String.fromCharCode(event.which));
+                    x4.refresh();
+                    break;
+                default:
+                    break;
+            }
+            event.preventDefault();
+        });
+    }
+
+};
