@@ -6,27 +6,27 @@
 
 $(document).ready(function () {
 
-    x2.initscr($("#container"));
+    x.initscr($("#container"));
 
-    x2.process();
+    x.process();
 
-    x2.printw("Type any character to see it in");
+    x.printw("Type any character to see it in");
 
-    x2.attron('A_BOLD');
-    x2.printw(" bold ");
-    x2.attroff('A_BOLD');
+    x.attron('A_BOLD');
+    x.printw(" bold ");
+    x.attroff('A_BOLD');
 
-    x2.printw("and thin one by one.\n\n=>");
+    x.printw("and thin one by one.\n\n=>");
 
-    x2.refresh();
+    x.refresh();
 
 });
 
 //var x2 = Object.create(webcurses);
 
-var x2 = new Webcurses('Example 2');
+var x = new Webcurses('Example 02');
 
-x2.process = function () {
+x.process = function () {
     var self = this;
     $(document).keypress(function(event) {
         //console.log(event.which);

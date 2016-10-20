@@ -10,22 +10,22 @@ $(document).ready(function () {
     var str;
     var maxyx = {row: 0, col: 0};
 
-    x4.initscr($("#container"));
-    x4.process();
+    x.initscr($("#container"));
+    x.process();
 
-    maxyx = x4.getmaxyx();
+    maxyx = x.getmaxyx();
 
-    x4.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
+    x.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
     
-    x4.refresh();
+    x.refresh();
 
-    x4.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
+    x.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
 
 });
 
-var x4 = new Webcurses('Example 4');
+var x = new Webcurses('Example 4');
 
-x4.process = function () {
+x.process = function () {
 
     var self = this;
 
