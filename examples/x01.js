@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Example of initscr and printw and refresh
+ * Example of initscr, printw, refresh and getch
  */
 
 $(document).ready(function () {
@@ -9,6 +9,7 @@ $(document).ready(function () {
     x.initscr($("#container"));
 
     x.printw("Пример в действии:\n\n");
+    x.getch();
     x.printw("Для запуска тестов мы будем использовать соответствующие JavaScript-библиотеки\n\n");
     x.printw("Мы будем использовать:\n\n");
     x.printw("  - Mocha - эта библиотека содержит общие функции для тестирования, включая describe и it.\n");
