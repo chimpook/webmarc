@@ -51,7 +51,12 @@ html, body {
 	color: darkred;
 }
 
+.a_standout { border: 1px inset red; }
+.a_underline { text-decoration: underline; }
+.a_blink { animation: blinker 0.5s ease infinite; }
+.a_dim { font-weight: lighter; }
 .a_bold { font-weight: bold; }
+.a_protect { text-decoration: overline; }
 
 .bg_,
 .bg_0 { background: black; }
