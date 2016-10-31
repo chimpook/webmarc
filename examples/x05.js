@@ -37,8 +37,22 @@ $(document).ready(function () {
 
     x.printw("Вернулись к обычной строке...");
 
-    x.refresh();
+    x.init_pair(1, x.COLOR_LIGHTYELLOW, x.COLOR_DARKRED);
+    x.init_pair(2, x.COLOR_LIGHTCYAN, x.COLOR_DARKMAGENTA);
 
+    x.chgat(10, x.A_BOLD, 1);
+
+    x.printw("Цветная строка, но не вся...");
+
+    x.chgat(-1, x.A_BOLD, 2);
+
+    x.printw("Цветная строка, но не вся...");
+
+    x.mvchgat(1,10,5,x.A_BLINK,2);
+
+    x.printw("Ok.......");
+
+    x.refresh();
 });
 
 var x = new Webcurses('Example 5');
