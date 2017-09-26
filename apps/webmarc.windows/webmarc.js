@@ -30,11 +30,11 @@ app.process = function() {
 
             case 'start':
 
-                if (event.keyCode == 13) {
+                if (event.keyCode === 13) {
                     self.load(webscreen.work);
                     self.status = 'work';
                 }
-                if (event.keyCode == 27) {
+                if (event.keyCode === 27) {
                     self.load(webscreen.end);
                     self.status = 'end';
                 }
@@ -43,7 +43,7 @@ app.process = function() {
 
             case 'work':
 
-                if (event.keyCode == 27) {
+                if (event.keyCode === 27) {
                     self.load(webscreen.end);
                     self.status = 'end';
                 }

@@ -10,7 +10,7 @@ function asyncEvent1() {
     }, Math.floor(400 + Math.random() * 4000));
 
     setTimeout(function working() {
-        if (dfd.state() == "pending") {
+        if (dfd.state() === "pending") {
             dfd.notify( "working1..." );
             setTimeout( working, 500 );
         }
@@ -23,14 +23,14 @@ function asyncEvent2() {
     var dfd = jQuery.Deferred();
 
     console.log('run:2');
-    dfd.resolve('ok:2')
+    dfd.resolve('ok:2');
     return dfd.promise();
 }
 
 function asyncEvent3() {
     var dfd = jQuery.Deferred();
     console.log('run:3');
-    //dfd.resolve('ok:3')
+    //dfd.resolve('ok:3');
     dfd.reject('fail:3');
     return dfd.promise();
 }
