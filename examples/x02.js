@@ -12,9 +12,9 @@ $(document).ready(function () {
 
     x.printw("Type any character to see it in");
 
-    x.attron('A_BOLD');
+    x.attron(x.A_BOLD);
     x.printw(" bold ");
-    x.attroff('A_BOLD');
+    x.attroff(x.A_BOLD);
 
     x.printw("and thin one by one.\n\n=>");
 
@@ -31,9 +31,9 @@ x.process = function () {
     $(document).keypress(function(event) {
         //console.log(event.which);
         if (self.A_BOLD) {
-            self.attroff('A_BOLD');
+            self.attroff(self.A_BOLD);
         } else {
-            self.attron('A_BOLD');
+            self.attron(self.A_BOLD);
         }
         self.printw(String.fromCharCode(event.which));
         self.refresh();
