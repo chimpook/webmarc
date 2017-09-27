@@ -32,7 +32,7 @@ x.process = function () {
     $(document).keypress(function(event) {
         switch (self.status) {
             case 'getstr':
-                if (event.which == 13) {
+                if (event.which === 13) {
                     self.status = '';
                     self.mvprintw(self.SCREEN_H - 2, 0, "You Entered: " + self.str);
                 }

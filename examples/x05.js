@@ -20,7 +20,7 @@ $(document).ready(function () {
     x.printw("Жирная подчеркнутая строка...");
     x.attroff(x.A_BOLD);
 
-    x.printw("Подчеркнутая строке...");
+    x.printw("Подчеркнутая строка...");
 
     x.attron(x.A_REVERSE);
 
