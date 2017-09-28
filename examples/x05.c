@@ -1,3 +1,4 @@
+/* pager functionality by Joseph Spainhour" <spainhou@bellsouth.net> */
 #include <ncurses.h>
 #include <stdlib.h>
 
@@ -27,20 +28,21 @@ int main(int argc, char * argv[])
     while ((ch = fgetc(fp)) != EOF)
     {
         getyx(stdscr, y, x);                /* get the current cursor position */
-        if (y == (row - 1))
+        if (y == (row - 1))                 /* are we are at the end of the screen */
         {
-            printw("<-Press Any Key->");
+            printw("<-Press Any Key->");    /* tell the user to press a key */
             getch();
-            clear();
-            move(0, 0);
+            clear();                        /* clear the screen */
+            move(0, 0);                     /* start at the beginning of the screen */
         }
 
-        if (prev == '/' && ch == '*')
+        if (prev == '/' && ch == '*')       /* If it is / and * then only
+                                     	    * switch bold on */
         {
-            attron(A_BOLD);
-            getyx(stdscr, y, x);
-            move(y, x - 1);
-            printw("%c%c", '/', ch);
+            attron(A_BOLD);                 /* cut bold on */
+            getyx(stdscr, y, x);            /* get the current curser position */
+            move(y, x - 1);                 /* back up one space */
+            printw("%c%c", '/', ch);        /* The actual printing is done here */
         }
         else
         {
@@ -50,12 +52,13 @@ int main(int argc, char * argv[])
 
         if (prev == '*' && ch == '/')
         {
-            attroff(A_BOLD);
+            attroff(A_BOLD);                /* Switch it off once we got *
+                                             * and then / */
         }
         prev = ch;
     }
     getch();
-    endwin();
+    endwin();                               /* End curses mode */
     fclose(fp);
     return 0;
 }
