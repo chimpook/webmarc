@@ -1,3 +1,8 @@
+/*
+ * Example 1.
+ * The Hello World !!! Program
+ */
+
 #include <ncurses.h>
 
 int main()

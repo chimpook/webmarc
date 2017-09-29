@@ -1,3 +1,8 @@
+/*
+ * Example 3.
+ * A Simple printw example
+ */
+
 #include <ncurses.h>                    /* ncurses.h includes stdio.h */
 #include <string.h>
 

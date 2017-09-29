@@ -1,48 +1,51 @@
-"use strict";
-
 /**
- * Example of getstr
+ * Example 4.
+ * A Simple scanw example
  */
 
-$(document).ready(function () {
+;"use strict";
 
-    var mesg = "Enter a string: ";
-    var str;
-    var maxyx = {row: 0, col: 0};
+var app = {
 
-    x.initscr($("#container"));
-    x.process();
+    buffer: '',
 
-    maxyx = x.getmaxyx();
+    wc: new Webcurses('Example 4. A Simple scanw example'),
 
-    x.mvprintw(maxyx.row/2, (maxyx.col - mesg.length)/2, mesg);
-    
-    x.refresh();
+    start: function() {
+        var self = this;
+        var prompt = "Enter a string: ";
 
-    x.getstr(); // Только устанавливается статус "getstr", вся обработка выполняется в цикле keypress
+        self.wc.initscr($("#container"));
+        var maxyx = self.wc.getmaxyx();
 
-});
+        self.wc.mvprintw(maxyx.row/2, (maxyx.col - prompt.length)/2, prompt);
+        self.wc.refresh();
+        self.wc.getstr();
+        self.process();
+    },
 
-var x = new Webcurses('Example 4');
-
-x.process = function () {
-
-    var self = this;
-
-    $(document).keypress(function(event) {
-        switch (self.status) {
-            case 'getstr':
-                if (event.which === 13) {
-                    self.status = '';
-                    self.mvprintw(self.SCREEN_H - 2, 0, "You Entered: " + self.str);
-                }
-                self.str += String.fromCharCode(event.which);
-                self.printw(String.fromCharCode(event.which));
-                self.refresh();
-                break;
-            default:
-                break;
-        }
-        event.preventDefault();
-    });
+    process: function() {
+        var self = this;
+        $(document).keypress(function(event) {
+            switch (self.wc.status) {
+                case 'getstr':
+                    if (event.which === 13) {
+                        self.wc.status = '';
+                        self.wc.mvprintw(self.wc.SCREEN_H - 2, 0, "You Entered: " + self.buffer);
+                    } else {
+                        self.buffer += String.fromCharCode(event.which);
+                        self.wc.printw(String.fromCharCode(event.which));
+                    }
+                    self.wc.refresh();
+                    break;
+                default:
+                    break;
+            }
+            event.preventDefault();
+        });
+    }
 };
+
+$(document).ready(function () {
+    app.start();
+});

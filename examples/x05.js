@@ -1,4 +1,9 @@
-"use strict";
+/**
+ * Example 5.
+ * A Simple Attributes example
+ */
+
+;"use strict";
 
 /**
  * 1) Загрузка текста исходного текстового файла,
@@ -8,18 +13,11 @@
 
 var app = {
 
-    status: 'start',
-    buffer: [],
+    buffer: '',
     index: 0,
 
-    /**
-     * Подключаем Webcurses
-     */
     wc: new Webcurses('Example 5'),
 
-    /**
-     * Запуск приложения
-     */
     start: function() {
         var self = this;
         self.wc.initscr($("#container"));
@@ -28,9 +26,6 @@ var app = {
         self.process();
     },
 
-    /**
-     * Вывод на экран фрагмента файла
-     */
     output: function() {
         var self = this;
         var prev = null;
@@ -66,9 +61,6 @@ var app = {
         self.wc.refresh();
     },
 
-    /**
-     * Обработчики событий
-     */
     handlers: function() {
         var self = this;
 
@@ -93,9 +85,6 @@ var app = {
         });
     },
 
-    /**
-     * Рабочий процесс приложения
-     */
     process: function () {
 
         var self = this;
@@ -104,7 +93,6 @@ var app = {
             switch (self.wc.status) {
                 case 'getstr':
                     if (event.which === 13) {
-                        console.log("enter key pressed");
                         self.wc.status = '';
                         app.output();
                     }
@@ -118,7 +106,5 @@ var app = {
 };
 
 $(document).ready(function () {
-
     app.start();
-
 });

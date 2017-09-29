@@ -1,3 +1,8 @@
+/*
+ * Example 5.
+ * A Simple Attributes example
+ */
+
 /* pager functionality by Joseph Spainhour" <spainhou@bellsouth.net> */
 #include <ncurses.h>
 #include <stdlib.h>

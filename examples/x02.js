@@ -1,43 +1,52 @@
-"use strict";
-
 /**
- * Example of attron and attroff and keyboard processing
+ * Example 2.
+ * Initialization Function Usage example
  */
 
-$(document).ready(function () {
+;"use strict";
 
-    x.initscr($("#container"));
+var app = {
 
-    x.process();
+    wc: new Webcurses('Example 2. Initialization Function Usage example'),
 
-    x.printw("Type any character to see it in");
+    start: function() {
+        var self = this;
+        self.wc.initscr($("#container"));
+        self.wc.printw("Type any character to see it in");
+        self.wc.attron(self.wc.A_BOLD);
+        self.wc.printw(" bold ");
+        self.wc.attroff(self.wc.A_BOLD);
+        self.wc.printw("and thin one by one.\n\n=>");
+        self.wc.refresh();
+        self.process();
+    },
 
-    x.attron(x.A_BOLD);
-    x.printw(" bold ");
-    x.attroff(x.A_BOLD);
+    process: function() {
+        var self = this;
 
-    x.printw("and thin one by one.\n\n=>");
+        $(document).keypress(function(event) {
+            self.wc.printw(String.fromCharCode(event.which));
+            self.wc.refresh();
+            self.toggle_width();
+            event.preventDefault();
+        });
+    },
 
-    x.refresh();
+    /**
+     * Переключение толщины шрифта
+     */
+    toggle_width: function() {
 
-});
+        var self = this;
 
-//var x2 = Object.create(webcurses);
-
-var x = new Webcurses('Example 02');
-
-x.process = function () {
-    var self = this;
-    $(document).keypress(function(event) {
-        //console.log(event.which);
-        if (self.A_BOLD) {
-            self.attroff(self.A_BOLD);
+        if (self.wc.A_BOLD) {
+            self.wc.attroff(self.wc.A_BOLD);
         } else {
-            self.attron(self.A_BOLD);
+            self.wc.attron(self.wc.A_BOLD);
         }
-        self.printw(String.fromCharCode(event.which));
-        self.refresh();
-        event.preventDefault();
-    });
-
+    }
 };
+
+$(document).ready(function () {
+    app.start();
+});

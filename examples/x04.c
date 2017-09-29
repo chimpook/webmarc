@@ -1,3 +1,8 @@
+/*
+ * Example 4.
+ * A Simple scanw example
+ */
+
 #include <ncurses.h>                    /* ncurses.h includes stdio.h */
 #include <string.h>
 
