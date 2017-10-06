@@ -19,48 +19,71 @@ var app = {
         self.x.printw('stdscr');
 
         // Создаем и наполняем тестовое окно
-        self.x.newwin('test', 12, 12, 5, 4);
-        self.x.wfillw('test', '@', self.x.COLOR_DARKBLUE, self.x.COLOR_CYAN);
-        self.x.wprintw('test', 'test');
+        self.x.newwin('alfa', 12, 12, 5, 4);
+        self.x.wfillw('alfa', '@', self.x.COLOR_DARKBLUE, self.x.COLOR_CYAN);
+        self.x.wprintw('alfa', 'alfa');
 
-        self.x.newwin('temp', 10, 10, 10, 40);
-        self.x.wfillw('temp', '@', self.x.COLOR_DARKGRAY, self.x.COLOR_LIGHTGREEN);
-        self.x.wprintw('temp', 'temp');
+        self.x.newwin('beta', 10, 10, 10, 40);
+        self.x.wfillw('beta', '@', self.x.COLOR_DARKGRAY, self.x.COLOR_LIGHTGREEN);
+        self.x.wprintw('beta', 'beta');
 
-        //self.x.delwin('temp');
+        //self.x.delwin('beta');
         self.x.refresh();
     },
 
     process: function () {
         var self = this;
-        var begin;
 
         $(document).keypress(function(event) {
             //self.x.wprintw('test', String(event.which));
-            begin = self.x.wgetbegin('test');
 
+            // Управляем первым окном
             switch (event.keyCode) {
 
-                case 37:
-                    begin.x--;
+                case self.x.KEY_LEFT:
+                    self.x.movewinto('alfa', 'left');
                     break;
 
-                case 38:
-                    begin.y--;
+                case self.x.KEY_UP:
+                    self.x.movewinto('alfa', 'up');
                     break;
 
-                case 39:
-                    begin.x++;
+                case self.x.KEY_RIGHT:
+                    self.x.movewinto('alfa', 'right');
                     break;
 
-                case 40:
-                    begin.y++;
+                case self.x.KEY_DOWN:
+                    self.x.movewinto('alfa', 'down');
                     break;
 
                 default:
                     break;
             }
-            self.x.movewin('test', begin.y, begin.x);
+
+            // Управляем вторым окном
+            switch (event.which) {
+
+                case self.x.KEY_A:
+                    self.x.movewinto('beta', 'left');
+                    break;
+
+                case self.x.KEY_W:
+                    self.x.movewinto('beta', 'up');
+                    break;
+
+                case self.x.KEY_D:
+                    self.x.movewinto('beta', 'right');
+                    break;
+
+                case self.x.KEY_S:
+                    self.x.movewinto('beta', 'down');
+                    break;
+
+                default:
+                    break;
+            }
+            //console.log('keyCode: ' + event.keyCode + ', Which: ' + event.which);
+
             self.x.refresh();
             event.preventDefault();
         });
