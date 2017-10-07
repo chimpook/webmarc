@@ -18,13 +18,16 @@ var app = {
         self.x.fillw('@', self.x.COLOR_DARKRED, self.x.COLOR_LIGHTYELLOW);
         self.x.printw('stdscr');
 
-        // Создаем и наполняем тестовое окно
+        // Создаем и наполняем тестовое окно alfa
         self.x.newwin('alfa', 12, 12, 5, 4);
         self.x.wfillw('alfa', '@', self.x.COLOR_DARKBLUE, self.x.COLOR_CYAN);
+        self.x.wbox('alfa', 'ascii');
         self.x.wprintw('alfa', 'alfa');
 
+        // Создаем и наполняем тестовое окно beta
         self.x.newwin('beta', 10, 10, 10, 40);
         self.x.wfillw('beta', '@', self.x.COLOR_DARKGRAY, self.x.COLOR_LIGHTGREEN);
+        self.x.wbox('beta', 'utf-8');
         self.x.wprintw('beta', 'beta');
 
         //self.x.delwin('beta');
