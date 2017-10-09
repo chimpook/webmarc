@@ -32,7 +32,7 @@ var app = {
 
         //self.x.delwin('beta');
         self.x.refresh();
-        self.goback();
+        self.x.makebacklink("../index.html");
     },
 
     process: function () {
@@ -91,14 +91,6 @@ var app = {
             self.x.refresh();
             event.preventDefault();
         });
-    },
-
-    goback: function () {
-        var self = this;
-
-        $("body").append('<div class="back" style="position: absolute; top: ' + self.x.ws_height + 'px;">' +
-            '<a href="../index.html" style="color: royalblue;">Back to Index</a>' +
-            '</div>');
     }
 };
 

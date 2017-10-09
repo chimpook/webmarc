@@ -7,13 +7,14 @@
 
 var app = {
 
-    wc: new Webcurses('Example 1. The Hello World !!! Program.'),
+    x: new Webcurses('Example 1. The Hello World !!! Program.'),
 
     start: function () {
         var self = this;
-        self.wc.initscr($("#container"));
-        self.wc.printw("Hello World !!!");
-        self.wc.refresh();
+        self.x.initscr($("#container"));
+        self.x.printw("Hello World !!!");
+        self.x.refresh();
+        self.x.makebacklink("../index.html");
     }
 };
 

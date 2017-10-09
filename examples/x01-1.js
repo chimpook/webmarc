@@ -1,51 +1,96 @@
-"use strict";
-
 /**
- * Example of initscr, printw, refresh and getch
+ * Example 1.
+ * The Hello World !!! Program
+ * Extended example of getch command
  */
 
-$(document).ready(function () {
+;"use strict";
 
-    x.initscr($("#container"));
+var app = {
 
-    x.printw("Пример в действии:\n\n");
-    x.refresh();
+    x: new Webcurses('Example 1. Extended example of getch command.'),
 
-    // Вот такая реализация getch :^\
-    x.status = 'getch';
-    var t1 = function() {
-        if(x.status !== 'getch') {
+    status: 'wait',
 
-            x.printw("Для запуска тестов мы будем использовать соответствующие JavaScript-библиотеки\n\n");
-            x.printw("Мы будем использовать:\n\n");
-            x.printw("  - Mocha - эта библиотека содержит общие функции для тестирования, включая describe и it.\n");
-            x.printw("  - Chai - библиотека поддерживает разнообразные функции для проверок. " +
-                "Есть разные „cтили‟ проверки результатов, с которыми мы познакомимся позже, " +
-                "на текущий момент мы будем использовать лишь assert.equal.\n");
-            x.refresh();
+    strings: [],
 
-            x.status = 'getch';
-            var t2 = function() {
-                if(x.status !== 'getch') {
+    start: function () {
+        var self = this;
+        self.x.initscr($("#container"));
+        self.x.printw("Hello World !!! \nPress enter:\n");
+        self.x.refresh();
+        self.x.makebacklink("../index.html");
+    },
 
-                    x.printw("  - Sinon - для эмуляции и хитрой подмены функций „заглушками‟, понадобится позднее.\n\n");
-                    x.printw("Эти библиотеки позволяют тестировать JS не только в браузере, но и на сервере Node.JS. " +
-                        "Здесь мы рассмотрим браузерный вариант, серверный использует те же функции.");
-                    x.refresh();
-                } else {
-                    setTimeout(t2, 100);
-                }
-            };
-            t2();
+    findWait: function() {
+        var self = this;
 
-        } else {
-            //console.log('wait fot t1');
-            setTimeout(t1, 100);
+        for (var i = 0; i < self.strings.length; i++) {
+            if (self.strings[i].status === 'wait') {
+                return i;
+            }
         }
-    };
-    t1();
+    },
 
+    process: function () {
+        var self = this;
 
+        $(document).keypress(function(event) {
+
+            switch (event.keyCode) {
+
+                case self.x.KEY_ENTER:
+
+                    var w = self.findWait();
+
+                    if (w !== undefined) {
+                        self.strings[w].status = 'ready';
+
+                        for (var i = w; i < self.strings.length && self.strings[i].status === 'ready'; i++) {
+                            self.x.printw(self.strings[i].text);
+                            self.strings[i].status = 'done';
+                        }
+                        self.x.refresh();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            //console.log('keyCode: ' + event.keyCode + ', Which: ' + event.which);
+
+            self.x.refresh();
+            event.preventDefault();
+        });
+    },
+
+    getch: function () {
+        var self = this;
+
+        self.status = 'wait';
+    },
+
+    print: function(string) {
+        var self = this;
+        var index = self.strings.length;
+
+        self.strings[index] = {
+            text: string,
+            status: self.status
+        };
+
+        self.status = 'ready';
+    }
+};
+
+$(document).ready(function () {
+    app.start();
+    app.getch();
+    app.print("Первая строка\n");
+    app.getch();
+    app.print("Вторая строка\n");
+    app.print("Третья строка\n");
+    app.getch();
+    app.print("Четвертая строка\n");
+    app.process();
 });
-
-var x = new Webcurses('Example 01');
