@@ -11,27 +11,22 @@ var app = {
 
     start: function () {
         var self = this;
+        var height, width, startx, starty;
 
         self.x.initscr($("#container"));
 
-        // Наполняем стандартное окно
-        self.x.fillw('@', self.x.COLOR_DARKRED, self.x.COLOR_LIGHTYELLOW);
-        self.x.printw('stdscr');
+        self.x.printw('Press F1 to exit');
 
-        // Создаем и наполняем тестовое окно alfa
-        self.x.newwin('alfa', 12, 12, 5, 4);
-        self.x.wfillw('alfa', '@', self.x.COLOR_DARKBLUE, self.x.COLOR_CYAN);
-        self.x.wbox('alfa', 'ascii');
-        self.x.wprintw('alfa', 'alfa');
+        height = 3;
+        width = 10;
+        starty = (self.x.LINES - height) / 2;
+        startx = (self.x.COLS - width) / 2;
 
-        // Создаем и наполняем тестовое окно beta
-        self.x.newwin('beta', 10, 10, 10, 40);
-        self.x.wfillw('beta', '@', self.x.COLOR_DARKGRAY, self.x.COLOR_LIGHTGREEN);
-        self.x.wbox('beta', 'utf-8');
-        self.x.wprintw('beta', 'beta');
+        self.x.newwin('my_win', height, width, starty, startx);
+        self.x.wbox('my_win', 'utf-8');
 
-        //self.x.delwin('beta');
         self.x.refresh();
+        self.buildbacklink();
     },
 
     process: function () {
@@ -40,56 +35,46 @@ var app = {
         $(document).keypress(function(event) {
             //self.x.wprintw('test', String(event.which));
 
-            // Управляем первым окном
+            // Управляем первым окном (под Chrome не работает, там events надо как-то по-другому организовывать)
             switch (event.keyCode) {
 
                 case self.x.KEY_LEFT:
-                    self.x.movewinto('alfa', 'left');
+                    self.x.movewinto('my_win', 'left');
                     break;
 
                 case self.x.KEY_UP:
-                    self.x.movewinto('alfa', 'up');
+                    self.x.movewinto('my_win', 'up');
                     break;
 
                 case self.x.KEY_RIGHT:
-                    self.x.movewinto('alfa', 'right');
+                    self.x.movewinto('my_win', 'right');
                     break;
 
                 case self.x.KEY_DOWN:
-                    self.x.movewinto('alfa', 'down');
+                    self.x.movewinto('my_win', 'down');
+                    break;
+
+                case self.x.KEY_F1:
+                    window.location.href = "../";
                     break;
 
                 default:
                     break;
             }
 
-            // Управляем вторым окном
-            switch (event.which) {
-
-                case self.x.KEY_A:
-                    self.x.movewinto('beta', 'left');
-                    break;
-
-                case self.x.KEY_W:
-                    self.x.movewinto('beta', 'up');
-                    break;
-
-                case self.x.KEY_D:
-                    self.x.movewinto('beta', 'right');
-                    break;
-
-                case self.x.KEY_S:
-                    self.x.movewinto('beta', 'down');
-                    break;
-
-                default:
-                    break;
-            }
             //console.log('keyCode: ' + event.keyCode + ', Which: ' + event.which);
 
             self.x.refresh();
             event.preventDefault();
         });
+    },
+
+    buildbacklink: function () {
+        var self = this;
+
+        $("body").append('<div class="back" style="position: absolute; top: ' + self.x.ws_height + 'px;">' +
+            '<a href="../index.html" style="color: royalblue;">Back to Index</a>' +
+            '</div>');
     }
 };
 

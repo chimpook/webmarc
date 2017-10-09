@@ -31,8 +31,8 @@ var app = {
         var prev = null;
 
         self.wc.clear();
-        for (var row = 0; row < (self.wc.SCREEN_H - 1) && self.index < self.buffer.length; row++) {
-            for (var col = 0; col <= self.wc.SCREEN_W && self.index < self.buffer.length; col++) {
+        for (var row = 0; row < (self.wc.LINES - 1) && self.index < self.buffer.length; row++) {
+            for (var col = 0; col <= self.wc.COLS && self.index < self.buffer.length; col++) {
                 if (self.buffer[self.index] === '\n') {
                     self.index++;
                     break;

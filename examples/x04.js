@@ -31,7 +31,7 @@ var app = {
                 case 'getstr':
                     if (event.which === 13) {
                         self.wc.status = '';
-                        self.wc.mvprintw(self.wc.SCREEN_H - 2, 0, "You Entered: " + self.buffer);
+                        self.wc.mvprintw(self.wc.LINES - 2, 0, "You Entered: " + self.buffer);
                     } else {
                         self.buffer += String.fromCharCode(event.which);
                         self.wc.printw(String.fromCharCode(event.which));
