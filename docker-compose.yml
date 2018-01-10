@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+    webmarc.local:
+        build:
+            context: ./docker
+            dockerfile: Dockerfile
+        container_name: webmarc
+        image: webmarc
+        environment:
+            XDEBUG_CONFIG: remote_host=${HOST_IP}
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "8080:80"
+        extra_hosts:
+            - "webmarc.local:127.0.0.1"
+            - "dev-mysql:10.0.103.206"
+        restart: always
+        privileged: true
